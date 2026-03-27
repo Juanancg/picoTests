@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include "pico/stdlib.h"
 #include "pico/cyw43_arch.h"
+
+#include "Config.h"
 #include "Logger.h"
+#include "WifiManager.h"
 
 int main()
 {
@@ -17,13 +20,19 @@ int main()
     // Example to turn on the Pico W LED
     cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 1);
 
-    // Create an instance of Logger
     Logger logger;
+    WifiManager wifi(logger);
+    if (!wifi.init())
+      return -1;
 
-    while (true)
-    {
-        // printf("Hello, world!\n");
-        logger.error("Hello, world from logger!");
-        sleep_ms(1000);
+    //   if (!wifi.connect(WIFI_SSID, WIFI_PASSWORD, 15000)) {
+    //     logger.error("Cannot continue without WiFi!");
+    //     //   return -2;
+    //   }
+
+    while (true) {
+      // printf("Hello, world!\n");
+      logger.error("Hello, world from logger!");
+      sleep_ms(1000);
     }
 }

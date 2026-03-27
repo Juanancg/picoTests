@@ -7,12 +7,11 @@ WifiManager::WifiManager(const Logger &logger) : log_(logger) {}
 
 bool WifiManager::init() {
   log_.info("Initializing CYW43...");
-  if (cyw43_arch_init()) {
-
-    log_.error("cyw43_arch_init() failed");
-
-    return false;
-  }
+  // Temporary commenting because we already do this in the main to initialize
+  // the led if (cyw43_arch_init()) {
+  //   log_.error("cyw43_arch_init() failed");
+  //   return false;
+  // }
 
   cyw43_arch_enable_sta_mode();
 
