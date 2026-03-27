@@ -38,7 +38,7 @@ pico_sdk_init()
 set(SOURCES
     main.cpp
     Logger.cpp
-    # Add future .cpp files here
+    WifiManager.cpp
 )
 
 # Add executable. Default name is the project name, version 0.1
@@ -53,7 +53,11 @@ pico_enable_stdio_usb(first_steps_bt 1)
 
 # Add the standard library to the build
 target_link_libraries(first_steps_bt
-        pico_stdlib)
+        pico_stdlib
+        pico_cyw43_arch_lwip_threadsafe_background
+        # pico_btstack_cyw43
+        # pico_btstack_ble
+)
 
 # Add the standard include files to the build
 target_include_directories(first_steps_bt PRIVATE
@@ -61,9 +65,13 @@ target_include_directories(first_steps_bt PRIVATE
 )
 
 # Add any user requested libraries
-target_link_libraries(first_steps_bt 
-        pico_cyw43_arch_none
-        )
+# target_link_libraries(first_steps_bt 
+#         pico_cyw43_arch_none
+#         )
+
+target_compile_definitions(first_steps_bt PRIVATE
+        CYW43_LWIP=1
+)
 
 pico_add_extra_outputs(first_steps_bt)
 
