@@ -23,7 +23,7 @@ int main()
     while (true)
     {
         // printf("Hello, world!\n");
-        logger.printMessage("Hello, world from logger!");
+        logger.error("Hello, world from logger!");
         sleep_ms(1000);
     }
 }
